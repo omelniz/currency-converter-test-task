@@ -1,0 +1,16 @@
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #1a237e;
+  border-radius: 5px;
+  height: 40px;
+  font-size: 16px;
+  padding-left: 10px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  line-height: 19px;
+  margin: 0px 0px 4px 10px;
+}
