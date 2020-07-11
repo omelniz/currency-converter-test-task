@@ -3,7 +3,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import FormLogin, { ERRORS } from "./index";
 
-const setup = () => render(<FormLogin />);
+const onSubmit = jest.fn();
+const setup = () => render(<FormLogin onSubmit={onSubmit} />);
 const getFields = () => ({
   emailField: screen.getByRole("textbox", { name: "Логин" }),
   passwordField: screen.getByLabelText("Пароль"),
@@ -33,7 +34,7 @@ it("should represent email field", () => {
 
   const emailField = screen.getByRole("textbox", { name: "Логин" });
   expect(emailField.getAttribute("type")).toBe("email");
-  expect(emailField.getAttribute("name")).toBe("email");
+  expect(emailField.getAttribute("name")).toBe("login");
   expect(emailField.getAttribute("placeholder")).toBe("user@mail.ru");
 });
 
@@ -105,4 +106,23 @@ it("should validate a password", async () => {
 
   await userEvent.type(passwordField, "1234567");
   expect(screen.queryByText(/Минимальное количество символов 7/i)).not.toBeInTheDocument();
+});
+
+it("should have callback onSubmit", async () => {
+  setup();
+
+  const validData = {
+    login: "correct@email.com",
+    password: "1234567",
+  };
+
+  const { emailField, passwordField } = getFields();
+
+  await userEvent.type(emailField, validData.login);
+  await userEvent.type(passwordField, validData.password);
+
+  onSubmit.mockReset();
+  userEvent.click(getSubmitBtn());
+  expect(onSubmit).toHaveBeenCalled();
+  expect(onSubmit.mock.calls[0][0]).toEqual(validData);
 });

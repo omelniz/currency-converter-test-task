@@ -1,7 +1,11 @@
 import request from "./request";
 
-const url = "/url";
-const fullUrl = `http://test.com${url}`;
+const url = "http://test.com";
+const action = {
+  action: "login",
+  login: "correct@email.com",
+  password: "password",
+};
 const headers = { "Content-Type": "application/json", Accept: "application/json" };
 const fetchMock = (global.fetch = jest.fn());
 const data = { a: 1, b: 2 };
@@ -14,21 +18,10 @@ afterEach(() => {
 it("should fetch and parse response", async () => {
   fetchMock.mockResolvedValueOnce({ ok: true, json });
 
-  const response = await request(url);
+  const response = await request(action);
 
   expect(response).toEqual(data);
-  expect(fetchMock).toBeCalledWith(fullUrl, { headers });
-});
-
-it("should pass options", async () => {
-  const options = { method: "GET", headers: { "X-CUSMOT": 1 } };
-
-  fetchMock.mockResolvedValueOnce({ ok: true, json });
-
-  const response = await request(url, options);
-
-  expect(response).toEqual(data);
-  expect(fetchMock).toBeCalledWith(fullUrl, { method: "GET", headers: { ...headers, "X-CUSMOT": 1 } });
+  expect(fetchMock).toBeCalledWith(url, { method: "POST", body: JSON.stringify(action), headers });
 });
 
 it("should throw an error", async (done) => {
@@ -36,7 +29,7 @@ it("should throw an error", async (done) => {
 
   try {
     fetchMock.mockResolvedValueOnce({ ok: false, json, statusText });
-    await request(url);
+    await request(action);
   } catch (err) {
     expect(err.message).toBe(statusText);
     done();

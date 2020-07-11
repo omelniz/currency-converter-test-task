@@ -4,13 +4,15 @@ const DEFAULT_HEADERS = {
   Accept: "application/json",
 };
 
-async function request(url: string, options: object = {}) {
-  const headers = { ...DEFAULT_HEADERS, ...options.headers };
-  const response = await fetch(`${API_URL}${url}`, { ...options, headers });
-  const data = await response.json();
+async function request(action) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: DEFAULT_HEADERS,
+    body: JSON.stringify(action),
+  });
 
   if (response.ok) {
-    return data;
+    return response.json();
   }
 
   throw new Error(response.statusText);

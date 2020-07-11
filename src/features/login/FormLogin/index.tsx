@@ -28,8 +28,12 @@ const password = (value: string) => {
 const composeValidators = (...validators) => (value, allValues, meta) =>
   validators.reduce((error, validator) => error || validator(value, allValues, meta), undefined);
 
-const FormLogin: React.FC = () => (
-  <Form onSubmit={() => {}}>
+interface IFormLogin {
+  onSubmit: (values: { login: string; password: string }) => void;
+}
+
+const FormLogin: React.FC<IFormLogin> = ({ onSubmit }) => (
+  <Form onSubmit={onSubmit}>
     {({ handleSubmit }) => (
       <form aria-label="Login form" className={styles.form} onSubmit={handleSubmit}>
         <header className={styles.header}>
@@ -39,7 +43,7 @@ const FormLogin: React.FC = () => (
           <Field
             id="f-email"
             className={styles.row}
-            name="email"
+            name="login"
             type="email"
             label="Логин"
             placeholder="user@mail.ru"
