@@ -43,10 +43,13 @@ it("should not represent an error when only touched", () => {
   setup({ meta: { touched: true, error: "" } });
 
   expect(screen.getByRole("textbox").getAttribute("aria-invalid")).toBe("false");
+  expect(screen.queryAllByRole("alert").length).toBeFalsy();
 });
 
 it("should represent an error", () => {
-  setup({ meta: { touched: true, error: "error" } });
+  const error = "Custom error";
+  setup({ meta: { touched: true, error } });
 
   expect(screen.getByRole("textbox").getAttribute("aria-invalid")).toBe("true");
+  expect(screen.getByRole("alert").innerHTML).toBe(error);
 });

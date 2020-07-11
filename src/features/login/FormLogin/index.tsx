@@ -5,6 +5,29 @@ import Button from "./../../../components/Button";
 import { ReactComponent as ArrowRight } from "./../../../components/Icons/arrow-right.svg";
 import styles from "./login.module.css";
 
+export const ERRORS = {
+  REQUIRED: "Обязательное поле",
+  EMAIL: "Введите корректный емайл",
+  PASSWORD: "Минимальное количество символов 7",
+};
+
+const EMAIL_REGEX = /^(?!^\.)([a-zA-Z0-9_\-\.\+]{0,63}[a-zA-Z0-9_\-\+])@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]{1,254}\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+const required = (value: string) => (value ? undefined : ERRORS.REQUIRED);
+const email = (value: string) => (EMAIL_REGEX.test(value) ? undefined : ERRORS.EMAIL);
+const password = (value: string) => {
+  let error = undefined;
+
+  if (value.length < 7) {
+    error = ERRORS.PASSWORD;
+  }
+
+  return error;
+};
+
+const composeValidators = (...validators) => (value, allValues, meta) =>
+  validators.reduce((error, validator) => error || validator(value, allValues, meta), undefined);
+
 const FormLogin: React.FC = () => (
   <Form onSubmit={() => {}}>
     {({ handleSubmit }) => (
@@ -21,6 +44,7 @@ const FormLogin: React.FC = () => (
             label="Логин"
             placeholder="user@mail.ru"
             component={TextField}
+            validate={composeValidators(required, email)}
           />
           <Field
             id="f-password"
@@ -30,6 +54,7 @@ const FormLogin: React.FC = () => (
             label="Пароль"
             placeholder="*********"
             component={TextField}
+            validate={composeValidators(required, password)}
           />
         </div>
         <footer className={styles.footer}>

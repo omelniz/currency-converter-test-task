@@ -1,8 +1,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import FormLogin from "./index";
+import userEvent from "@testing-library/user-event";
+import FormLogin, { ERRORS } from "./index";
 
 const setup = () => render(<FormLogin />);
+const getFields = () => ({
+  emailField: screen.getByRole("textbox", { name: "Логин" }),
+  passwordField: screen.getByLabelText("Пароль"),
+});
+const getSubmitBtn = () => screen.getByRole("button", { name: "Вход arrow-right.svg" });
 
 it("should render a form", () => {
   setup();
@@ -19,8 +25,7 @@ it("should represent a title", () => {
 it("should have submit button", () => {
   setup();
 
-  const button = screen.getByRole("button", { name: "Вход arrow-right.svg" });
-  expect(button.getAttribute("type")).toBe("submit");
+  expect(getSubmitBtn().getAttribute("type")).toBe("submit");
 });
 
 it("should represent email field", () => {
@@ -39,4 +44,65 @@ it("should represent password field", () => {
   expect(passwordField.getAttribute("type")).toBe("password");
   expect(passwordField.getAttribute("name")).toBe("password");
   expect(passwordField.getAttribute("placeholder")).toBe("*********");
+});
+
+it("should not represents errors by default", () => {
+  setup();
+
+  Object.values(getFields()).forEach((field) => {
+    expect(field).toBeValid();
+  });
+});
+
+it("all field should be required", () => {
+  setup();
+
+  userEvent.click(getSubmitBtn());
+
+  Object.values(getFields()).forEach((field) => {
+    expect(field).toBeInvalid();
+  });
+
+  const errors = screen.getAllByRole("alert");
+  errors.forEach((error) => {
+    expect(error.innerHTML).toBe(ERRORS.REQUIRED);
+  });
+
+  expect(errors.length).toBe(2);
+});
+
+it("should validate an email", async () => {
+  setup();
+
+  const { emailField } = getFields();
+  const emailErrorREGEX = /Введите корректный емайл/i;
+
+  userEvent.click(getSubmitBtn());
+  expect(screen.queryByText(emailErrorREGEX)).not.toBeInTheDocument();
+
+  await userEvent.type(emailField, "user");
+  screen.getByText(emailErrorREGEX);
+
+  await userEvent.type(emailField, "user@");
+  screen.getByText(emailErrorREGEX);
+
+  await userEvent.type(emailField, "user@gmail");
+  screen.getByText(emailErrorREGEX);
+
+  await userEvent.type(emailField, "user@gmail.com");
+  expect(screen.queryByText(emailErrorREGEX)).not.toBeInTheDocument();
+});
+
+it("should validate a password", async () => {
+  setup();
+
+  const { passwordField } = getFields();
+
+  userEvent.click(getSubmitBtn());
+
+  await userEvent.type(passwordField, "123");
+  screen.getByText(/Минимальное количество символов 7/i);
+
+  await userEvent.type(passwordField, "1234567");
+  expect(screen.queryByText(/Минимальное количество символов 7/i)).not.toBeInTheDocument();
 });
