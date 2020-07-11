@@ -1,0 +1,13 @@
+.header {
+  max-width: 1168px;
+  padding: 42px 20px 0px 20px;
+  margin: 0 auto 50px auto;
+}
+
+.logo {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  margin: 0px;
+}

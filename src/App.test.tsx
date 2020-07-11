@@ -7,3 +7,9 @@ test("render login page by default", () => {
 
   screen.getByTestId("page-login");
 });
+
+it("should represent a header", () => {
+  render(<App />);
+
+  screen.getByTestId("header");
+});
