@@ -1,5 +1,6 @@
 import React from "react";
-import Header from "./index";
+import {action} from "@storybook/addon-actions";
+import {Header} from "./index";
 
 export default {
   title: "UI/Header",
@@ -7,3 +8,4 @@ export default {
 };
 
 export const base = () => <Header />;
+export const authorized = () => <Header onLogout={action("onLogout")} isAuthorized />;
