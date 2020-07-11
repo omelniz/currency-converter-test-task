@@ -1,0 +1,35 @@
+.form {
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #ffffff;
+  min-height: 460px;
+}
+
+.inner,
+.footer {
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #1a237e;
+  text-align: center;
+  padding: 17px 20px 16px 20px;
+  margin-bottom: 70px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 27px;
+  margin: 0px;
+  color: #ffffff;
+}
+
+.inner {
+  margin-bottom: 50px;
+}
+
+.row {
+  margin-bottom: 15px;
+}

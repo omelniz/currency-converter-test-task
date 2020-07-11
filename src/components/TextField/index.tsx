@@ -6,7 +6,7 @@ import styles from "./text-field.module.css";
 export interface ITextField {
   id: string;
   name: string;
-  type: "email" | "text";
+  type: "email" | "text" | "password";
   onChange: () => void;
   value?: string;
   label?: string;
