@@ -1,4 +1,6 @@
 import React from "react";
+import clsx from "clsx";
+import field from "../../decorators/Field";
 import styles from "./text-field.module.css";
 
 export interface ITextField {
@@ -10,9 +12,20 @@ export interface ITextField {
   label?: string;
   className?: string;
   placeholder?: string;
+  hasError?: boolean;
 }
 
-const TextField: React.FC<ITextField> = ({ id, className, name, type, value, onChange, placeholder, label }) => {
+export const TextField: React.FC<ITextField> = ({
+  id,
+  className,
+  name,
+  type,
+  value,
+  onChange,
+  placeholder,
+  label,
+  hasError,
+}) => {
   return (
     <div data-testid="text-field" className={className}>
       <label className={styles.label} htmlFor={id}>
@@ -20,12 +33,13 @@ const TextField: React.FC<ITextField> = ({ id, className, name, type, value, onC
       </label>
       <input
         id={id}
-        className={styles.input}
+        className={clsx(styles.input, { [styles.hasError]: hasError })}
         name={name}
         type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        aria-invalid={hasError}
       />
     </div>
   );
@@ -33,6 +47,7 @@ const TextField: React.FC<ITextField> = ({ id, className, name, type, value, onC
 
 TextField.defaultProps = {
   type: "text",
+  hasError: false,
 };
 
-export default TextField;
+export default field(TextField);

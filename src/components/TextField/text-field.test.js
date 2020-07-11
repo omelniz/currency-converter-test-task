@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import TextField, { ITextField } from "./index";
+import { ITextField, TextField } from "./index";
 
 const name = "name";
 const label = "label";
@@ -84,10 +84,28 @@ it("should represent email input", () => {
 it("should have callback on change", async () => {
   const onChange = jest.fn();
 
-  setup({onChange});
+  setup({ onChange });
 
   expect(onChange).not.toBeCalled();
 
   await userEvent.type(getInput(), "value");
   expect(onChange).toBeCalled();
+});
+
+it("should not represent error state by default", () => {
+  setup();
+
+  const input = getInput();
+
+  expect(input.classList.contains("hasError")).toBeFalsy();
+  expect(input.getAttribute("aria-invalid")).toBe("false");
+});
+
+it("should represent error state", () => {
+  setup({ hasError: true });
+
+  const input = getInput();
+
+  expect(input.classList.contains("hasError")).toBeTruthy();
+  expect(input.getAttribute("aria-invalid")).toBe("true");
 });
