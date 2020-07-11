@@ -1,6 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { StarIcon } from "./../../../components/Icons";
+import Table, { Thead, Tbody } from "./../../../components/Table";
 import styles from "./rates.module.css";
 
 interface IRate {
@@ -16,22 +17,22 @@ export interface ICurrencyRatesProps {
 }
 
 const CurrencyRates: React.FC<ICurrencyRatesProps> = ({ items, onToggleFavorite }) => (
-  <table className={styles.table}>
-    <thead className={styles.thead}>
+  <Table>
+    <Thead>
       <tr>
         <th></th>
         <th>Валютная пара</th>
         <th>Котировка</th>
         <th>Дата получения</th>
       </tr>
-    </thead>
-    <tbody className={styles.tbody}>
+    </Thead>
+    <Tbody>
       {items.map((item) => (
         <tr key={item.asset}>
           <td>
             <StarIcon
-              className={clsx(styles.star, { [styles.filledStar]: item.isActive })}
               role="button"
+              className={clsx(styles.star, { [styles.filledStar]: item.isActive })}
               onClick={() => onToggleFavorite(item)}
             />
           </td>
@@ -40,8 +41,8 @@ const CurrencyRates: React.FC<ICurrencyRatesProps> = ({ items, onToggleFavorite 
           <td>{item.date}</td>
         </tr>
       ))}
-    </tbody>
-  </table>
+    </Tbody>
+  </Table>
 );
 
 CurrencyRates.defaultProps = {
