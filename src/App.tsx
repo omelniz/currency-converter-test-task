@@ -6,12 +6,12 @@ import { useStore } from "./models/store";
 
 function App() {
   const { auth } = useStore();
-  const { logout, isAuthorized } = auth;
+  const { logout, login, isAuthorized } = auth;
 
   return (
     <div>
       <Header onLogout={logout} isAuthorized={isAuthorized} />
-      <PageLogin />
+      <PageLogin onLogin={login} />
     </div>
   );
 }

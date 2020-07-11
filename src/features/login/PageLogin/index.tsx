@@ -1,15 +1,15 @@
 import React from "react";
 import FormLogin from "./../FormLogin";
 import styles from "./page.module.css";
-import request from "./../../../utils/request";
-import Auth from "./../../../models/auth";
 
-const auth = Auth.create({}, { request });
+interface IPageLogin {
+  onLogin: ({ login: string, password: string }) => void;
+}
 
-const PageLogin: React.FC = () => (
+const PageLogin: React.FC<IPageLogin> = ({ onLogin }) => (
   <div data-testid="page-login" className={styles.page}>
     <div className={styles.inner}>
-      <FormLogin onSubmit={auth.login} />
+      <FormLogin onSubmit={onLogin} />
     </div>
   </div>
 );
