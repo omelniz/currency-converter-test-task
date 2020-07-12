@@ -22,7 +22,7 @@ const PageHistory: React.FC = () => {
   return (
     <div className={styles.page} data-testid="page-history">
       <div className={styles.inner}>
-        <HistoryTable items={history.items} />
+        <HistoryTable items={history.all} />
       </div>
     </div>
   );

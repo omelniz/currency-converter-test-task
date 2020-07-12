@@ -17,7 +17,7 @@ describe("History", () => {
   });
 
   it("should fetch rates from server", (done) => {
-    const request = jest.fn().mockResolvedValue(items);
+    const request = jest.fn().mockResolvedValue({ deals: items });
     const history = History.create({ items: [] }, { request });
 
     history.fetchAll().then(() => {

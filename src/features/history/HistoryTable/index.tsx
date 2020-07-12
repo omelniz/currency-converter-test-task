@@ -28,8 +28,8 @@ const HistoryTable: React.FC<IHistoryTableProps> = ({ items }) => (
         </tr>
       </Thead>
       <Tbody>
-        {items.map((item) => (
-          <tr key={item.asset}>
+        {items.map((item, index) => (
+          <tr key={`${item.asset}${index}`}>
             <td>{item.asset}</td>
             <td>{item.startDate}</td>
             <td>{item.startQuote}</td>

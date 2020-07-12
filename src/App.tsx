@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import PageLogin from "./features/login/PageLogin";
 import PageRates from "./features/rates/PageRates";
+import PageHistory from "./features/history/PageHistory";
 import { useStore } from "./models/store";
 import ROUTES from "./utils/routes";
 
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route path={ROUTES.HOME} component={PageRates} exact />
         <Route path={ROUTES.LOGIN} component={PageLogin} />
+        <Route path={ROUTES.HISTORY} component={PageHistory} />
       </Switch>
     </BrowserRouter>
   );

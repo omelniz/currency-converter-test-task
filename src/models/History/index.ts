@@ -13,12 +13,17 @@ const History = types
   .model({
     items: types.array(HistoryRecord),
   })
+  .views((self) => ({
+    get all() {
+      return self.items.slice();
+    },
+  }))
   .actions((self) => ({
     fetchAll: flow(function* fetchAll() {
       try {
-        const history = yield getEnv(self).request({ action: "history" });
+        const response = yield getEnv(self).request({ action: "history" });
 
-        self.items = history;
+        self.items = response.deals;
       } catch (err) {}
     }),
   }));
