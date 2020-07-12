@@ -6,7 +6,7 @@ const action = {
   login: "correct@email.com",
   password: "password",
 };
-const headers = { "Content-Type": "application/json", Accept: "application/json" };
+const headers = { Accept: "application/json" };
 const fetchMock = (global.fetch = jest.fn());
 const data = { a: 1, b: 2 };
 const json = jest.fn().mockResolvedValue(data);
