@@ -1,6 +1,18 @@
 import { types, flow, getEnv } from "mobx-state-tree";
 
-export const AUTH_TOKEN = "isAuthorized";
+const AUTH_TOKEN = "isAuthorized";
+
+export function getAuth() {
+  return Boolean(localStorage.getItem(AUTH_TOKEN));
+}
+
+export function saveAuth() {
+  localStorage.setItem(AUTH_TOKEN, "true");
+}
+
+export function clearAuth() {
+  localStorage.removeItem(AUTH_TOKEN);
+}
 
 const Auth = types
   .model({
@@ -8,7 +20,7 @@ const Auth = types
   })
   .actions((self) => ({
     afterCreate() {
-      self.isAuthorized = Boolean(localStorage.getItem(AUTH_TOKEN));
+      self.isAuthorized = getAuth();
     },
 
     login: flow(function* login(values) {
@@ -16,7 +28,7 @@ const Auth = types
         const { login, password } = values;
         yield getEnv(self).request({ action: "login", login, password });
 
-        localStorage.setItem(AUTH_TOKEN, "true");
+        saveAuth();
         self.isAuthorized = true;
       } catch (err) {
         return err;
@@ -25,7 +37,7 @@ const Auth = types
 
     logout: function () {
       self.isAuthorized = false;
-      localStorage.removeItem(AUTH_TOKEN);
+      clearAuth();
     },
   }));
 

@@ -1,17 +1,24 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import FormLogin from "./../FormLogin";
 import styles from "./page.module.css";
+import ROUTES from "./../../../utils/routes";
+import { useStore } from "./../../../models/store";
 
-interface IPageLogin {
-  onLogin: ({ login: string, password: string }) => void;
-}
+const PageLogin: React.FC = () => {
+  const { auth } = useStore();
 
-const PageLogin: React.FC<IPageLogin> = ({ onLogin }) => (
-  <div data-testid="page-login" className={styles.page}>
-    <div className={styles.inner}>
-      <FormLogin onSubmit={onLogin} />
+  if (auth.isAuthorized) {
+    return <Redirect to={ROUTES.HOME} />;
+  }
+
+  return (
+    <div data-testid="page-login" className={styles.page}>
+      <div className={styles.inner}>
+        <FormLogin onSubmit={auth.login} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default PageLogin;

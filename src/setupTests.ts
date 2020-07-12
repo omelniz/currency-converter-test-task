@@ -5,3 +5,4 @@
 import "@testing-library/jest-dom/extend-expect";
 
 process.env.REACT_APP_API_URL = "http://test.com";
+global.fetch = jest.fn();

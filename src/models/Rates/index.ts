@@ -26,6 +26,7 @@ const Rates = types
     fetchAll: flow(function* fetchAll() {
       try {
         const rates = yield getEnv(self).request({ action: "quote" });
+
         self.items = rates;
       } catch (err) {}
     }),

@@ -17,32 +17,34 @@ export interface ICurrencyRatesProps {
 }
 
 const CurrencyRates: React.FC<ICurrencyRatesProps> = ({ items, onToggleFavorite }) => (
-  <Table>
-    <Thead>
-      <tr>
-        <th></th>
-        <th>Валютная пара</th>
-        <th>Котировка</th>
-        <th>Дата получения</th>
-      </tr>
-    </Thead>
-    <Tbody>
-      {items.map((item) => (
-        <tr key={item.asset}>
-          <td>
-            <StarIcon
-              role="button"
-              className={clsx(styles.star, { [styles.filledStar]: item.isActive })}
-              onClick={() => onToggleFavorite(item)}
-            />
-          </td>
-          <td>{item.asset}</td>
-          <td>{item.quote}</td>
-          <td>{item.date}</td>
+  <div data-testid="currency-rates">
+    <Table>
+      <Thead>
+        <tr>
+          <th></th>
+          <th>Валютная пара</th>
+          <th>Котировка</th>
+          <th>Дата получения</th>
         </tr>
-      ))}
-    </Tbody>
-  </Table>
+      </Thead>
+      <Tbody>
+        {items.map((item) => (
+          <tr key={item.asset}>
+            <td>
+              <StarIcon
+                role="button"
+                className={clsx(styles.star, { [styles.filledStar]: item.isActive })}
+                onClick={() => onToggleFavorite(item)}
+              />
+            </td>
+            <td>{item.asset}</td>
+            <td>{item.quote}</td>
+            <td>{item.date}</td>
+          </tr>
+        ))}
+      </Tbody>
+    </Table>
+  </div>
 );
 
 CurrencyRates.defaultProps = {

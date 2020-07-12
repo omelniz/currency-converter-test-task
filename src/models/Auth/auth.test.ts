@@ -1,11 +1,11 @@
-import Auth, { AUTH_TOKEN } from "./index";
+import Auth, { saveAuth, clearAuth, getAuth } from "./index";
 
 const request = jest.fn();
 
 const setup = () => Auth.create({}, { request });
 
 afterEach(() => {
-  localStorage.removeItem(AUTH_TOKEN);
+  clearAuth();
 });
 
 it("should not be authorized by default", () => {
@@ -13,18 +13,18 @@ it("should not be authorized by default", () => {
 });
 
 it("should keep authorized state", () => {
-  localStorage.setItem(AUTH_TOKEN, "true");
+  saveAuth();
   expect(setup().isAuthorized).toBeTruthy();
 });
 
 it("logout", () => {
-  localStorage.setItem(AUTH_TOKEN, "true");
+  saveAuth();
 
   const auth = setup();
   auth.logout();
 
   expect(auth.isAuthorized).toBeFalsy();
-  expect(localStorage.getItem(AUTH_TOKEN)).toBeFalsy();
+  expect(getAuth()).toBeFalsy();
 });
 
 it("success login", (done) => {
@@ -36,7 +36,7 @@ it("success login", (done) => {
   auth.login(values).then(() => {
     expect(request).toBeCalledWith({ action: "login", ...values });
     expect(auth.isAuthorized).toBeTruthy();
-    expect(localStorage.getItem(AUTH_TOKEN)).toBeTruthy();
+    expect(getAuth()).toBeTruthy();
     done();
   });
 });
