@@ -14,7 +14,7 @@ const getFields = () => ({
   emailField: screen.getByRole("textbox", { name: "Логин" }),
   passwordField: screen.getByLabelText("Пароль"),
 });
-const getSubmitBtn = () => screen.getByRole("button", { name: "Вход arrow-right.svg" });
+const getSubmitBtn = () => screen.getByRole("button");
 const sleep = () => new Promise((r) => setTimeout(r, 0));
 const submitForm = async (data) => {
   const { emailField, passwordField } = getFields();

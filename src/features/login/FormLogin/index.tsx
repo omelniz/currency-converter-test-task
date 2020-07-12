@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Field } from "react-final-form";
 import TextField from "./../../../components/TextField";
 import Button from "./../../../components/Button";
-import { ReactComponent as ArrowRight } from "./../../../components/Icons/arrow-right.svg";
+import { ArrowRightInvertedIcon } from "./../../../components/Icons";
 import styles from "./form-login.module.css";
 
 export const ERRORS = {
@@ -63,7 +63,7 @@ const FormLogin: React.FC<IFormLogin> = ({ onSubmit }) => (
         </div>
         <footer className={styles.footer}>
           <Button type="submit" disabled={submitting} fullWidth>
-            Вход <ArrowRight />
+            Вход <ArrowRightInvertedIcon />
           </Button>
           {submitError && (
             <p role="alert" className={styles.submitError}>
