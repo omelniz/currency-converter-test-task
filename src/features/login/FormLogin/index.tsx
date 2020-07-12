@@ -3,7 +3,7 @@ import { Form, Field } from "react-final-form";
 import TextField from "./../../../components/TextField";
 import Button from "./../../../components/Button";
 import { ReactComponent as ArrowRight } from "./../../../components/Icons/arrow-right.svg";
-import styles from "./login.module.css";
+import styles from "./form-login.module.css";
 
 export const ERRORS = {
   REQUIRED: "Обязательное поле",
@@ -34,7 +34,7 @@ interface IFormLogin {
 
 const FormLogin: React.FC<IFormLogin> = ({ onSubmit }) => (
   <Form onSubmit={onSubmit}>
-    {({ handleSubmit }) => (
+    {({ handleSubmit, submitError, submitting }) => (
       <form aria-label="Login form" className={styles.form} onSubmit={handleSubmit}>
         <header className={styles.header}>
           <h1 className={styles.title}>Вход в личный кабинет</h1>
@@ -62,9 +62,14 @@ const FormLogin: React.FC<IFormLogin> = ({ onSubmit }) => (
           />
         </div>
         <footer className={styles.footer}>
-          <Button type="submit" fullWidth>
+          <Button type="submit" disabled={submitting} fullWidth>
             Вход <ArrowRight />
           </Button>
+          {submitError && (
+            <p role="alert" className={styles.submitError}>
+              {submitError}
+            </p>
+          )}
         </footer>
       </form>
     )}

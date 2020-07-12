@@ -44,8 +44,20 @@ it("should not be full width by default", () => {
   expect(getButton().classList.contains("fullWidth")).toBeFalsy();
 });
 
-it('represents fullWidth', () => {
-  setup({fullWidth: true});
+it("represents fullWidth", () => {
+  setup({ fullWidth: true });
 
   expect(getButton().classList.contains("fullWidth")).toBeTruthy();
-})
+});
+
+it("not disabled by default", () => {
+  setup();
+
+  expect(getButton()).not.toBeDisabled()
+});
+
+it("disabled", () => {
+  setup({ disabled: true });
+
+  expect(getButton()).toBeDisabled()
+});

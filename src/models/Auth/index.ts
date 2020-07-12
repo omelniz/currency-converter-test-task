@@ -1,4 +1,5 @@
 import { types, flow, getEnv } from "mobx-state-tree";
+import { FORM_ERROR } from "final-form";
 
 const AUTH_TOKEN = "isAuthorized";
 
@@ -31,7 +32,7 @@ const Auth = types
         saveAuth();
         self.isAuthorized = true;
       } catch (err) {
-        return err;
+        return { [FORM_ERROR]: err.message };
       }
     }),
 

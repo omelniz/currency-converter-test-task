@@ -10,6 +10,10 @@
   font-size: 16px;
 }
 
+.button:disabled {
+  cursor: default;
+}
+
 .button:hover {
   background-color: #232fa9;
 }

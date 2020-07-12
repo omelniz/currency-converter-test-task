@@ -6,17 +6,19 @@ export interface IButtonProps {
   children: any;
   type?: "submit" | "button";
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
-const Button: React.FC<IButtonProps> = ({ children, type, fullWidth }) => (
-  <button className={clsx(styles.button, { [styles.fullWidth]: fullWidth })} type={type}>
+const Button: React.FC<IButtonProps> = ({ children, type, fullWidth, disabled }) => (
+  <button className={clsx(styles.button, { [styles.fullWidth]: fullWidth })} disabled={disabled} type={type}>
     {children}
   </button>
 );
- 
+
 Button.defaultProps = {
   type: "button",
   fullWidth: false,
+  disabled: false,
 };
 
 export default Button;

@@ -1,8 +1,13 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, act, getByRole } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { FORM_ERROR } from "final-form";
 import FormLogin, { ERRORS } from "./index";
 
+const validData = {
+  login: "correct@email.com",
+  password: "1234567",
+};
 const onSubmit = jest.fn();
 const setup = () => render(<FormLogin onSubmit={onSubmit} />);
 const getFields = () => ({
@@ -10,6 +15,15 @@ const getFields = () => ({
   passwordField: screen.getByLabelText("Пароль"),
 });
 const getSubmitBtn = () => screen.getByRole("button", { name: "Вход arrow-right.svg" });
+const sleep = () => new Promise((r) => setTimeout(r, 0));
+const submitForm = async (data) => {
+  const { emailField, passwordField } = getFields();
+
+  await userEvent.type(emailField, data.login);
+  await userEvent.type(passwordField, data.password);
+
+  userEvent.click(getSubmitBtn());
+};
 
 it("should render a form", () => {
   setup();
@@ -111,18 +125,50 @@ it("should validate a password", async () => {
 it("should have callback onSubmit", async () => {
   setup();
 
-  const validData = {
-    login: "correct@email.com",
-    password: "1234567",
-  };
-
-  const { emailField, passwordField } = getFields();
-
-  await userEvent.type(emailField, validData.login);
-  await userEvent.type(passwordField, validData.password);
-
   onSubmit.mockReset();
-  userEvent.click(getSubmitBtn());
+  await submitForm(validData);
+
   expect(onSubmit).toHaveBeenCalled();
   expect(onSubmit.mock.calls[0][0]).toEqual(validData);
+});
+
+it("should not represent submit error by default", () => {
+  setup();
+
+  expect(screen.queryByRole("alert")).toBeNull();
+});
+
+it("should represent submit error", async () => {
+  const error = "error";
+  onSubmit.mockReturnValueOnce({ [FORM_ERROR]: error });
+
+  setup();
+  await submitForm(validData);
+  screen.getByText(error);
+});
+
+it("should disable submit button on submitting state", async () => {
+  let resolve;
+
+  onSubmit.mockReturnValue(
+    new Promise((r) => {
+      resolve = r;
+    }),
+  );
+
+  setup();
+
+  const submitBtn = getSubmitBtn();
+  expect(submitBtn).toBeEnabled();
+
+  await act(async () => {
+    await submitForm(validData);
+    expect(submitBtn).toBeDisabled();
+  });
+
+  await act(async () => {
+    resolve();
+    await sleep();
+    expect(submitBtn).toBeEnabled();
+  });
 });

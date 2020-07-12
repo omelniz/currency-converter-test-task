@@ -1,3 +1,4 @@
+import { FORM_ERROR } from "final-form";
 import Auth, { saveAuth, clearAuth, getAuth } from "./index";
 
 const request = jest.fn();
@@ -42,15 +43,16 @@ it("success login", (done) => {
 });
 
 it("error login", (done) => {
+  const submitError = "Server Error";
   const values = { login: "correct@mail.com", password: "password" };
-  request.mockRejectedValueOnce({ ok: false, statusText: "Error" });
+  request.mockRejectedValueOnce(new Error(submitError));
 
   const auth = setup();
 
   auth.login(values).then((response) => {
     expect(request).toBeCalledWith({ action: "login", ...values });
     expect(auth.isAuthorized).toBeFalsy();
-    expect(response).toEqual({ ok: false, statusText: "Error" });
+    expect(response).toEqual({ [FORM_ERROR]: submitError });
     done();
   });
 });

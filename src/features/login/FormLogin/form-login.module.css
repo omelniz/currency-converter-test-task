@@ -33,3 +33,11 @@
 .row {
   margin-bottom: 15px;
 }
+
+.submitError {
+  margin: 8px 0px 0px 0px;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #d32f2f;
+}
