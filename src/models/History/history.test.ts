@@ -21,7 +21,7 @@ describe("History", () => {
     const history = History.create({ items: [] }, { request });
 
     history.fetchAll().then(() => {
-      expect(history.toJSON()).toEqual({ items });
+      expect(history.items).toEqual(items);
       done();
     });
   });
