@@ -6,17 +6,16 @@ import styles from "./rates.module.css";
 
 interface IRate {
   asset: string;
-  date: string;
+  startDate: string;
   quote: string;
   isActive?: boolean;
 }
 
 export interface ICurrencyRatesProps {
   items: Array<IRate>;
-  onToggleFavorite: (rate: IRate) => void;
 }
 
-const CurrencyRates: React.FC<ICurrencyRatesProps> = ({ items, onToggleFavorite }) => (
+const CurrencyRates: React.FC<ICurrencyRatesProps> = ({ items }) => (
   <div data-testid="currency-rates">
     <Table>
       <Thead>
@@ -34,12 +33,12 @@ const CurrencyRates: React.FC<ICurrencyRatesProps> = ({ items, onToggleFavorite 
               <StarIcon
                 role="button"
                 className={clsx(styles.star, { [styles.filledStar]: item.isActive })}
-                onClick={() => onToggleFavorite(item)}
+                onClick={() => item.toggleFavorite()}
               />
             </td>
             <td>{item.asset}</td>
             <td>{item.quote}</td>
-            <td>{item.date}</td>
+            <td>{item.startDate}</td>
           </tr>
         ))}
       </Tbody>

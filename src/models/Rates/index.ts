@@ -3,7 +3,7 @@ import { types, flow, getEnv } from "mobx-state-tree";
 export const Rate = types
   .model({
     asset: types.string,
-    date: types.string,
+    startDate: types.string,
     quote: types.string,
     isActive: false,
   })
@@ -25,9 +25,9 @@ const Rates = types
   .actions((self) => ({
     fetchAll: flow(function* fetchAll() {
       try {
-        const rates = yield getEnv(self).request({ action: "quote" });
+        const response = yield getEnv(self).request({ action: "quote" });
 
-        self.items = rates;
+        self.items = response.assets;
       } catch (err) {}
     }),
   }));

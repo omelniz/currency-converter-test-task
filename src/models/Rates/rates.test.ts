@@ -1,6 +1,6 @@
 import Rates, { Rate } from "./index";
 
-const rawRate = { asset: "asset", date: "date", quote: "quote" };
+const rawRate = { asset: "asset", startDate: "date", quote: "quote" };
 const items = [...Array(5)].map(() => ({ ...rawRate, isActive: false }));
 
 describe("Rate", () => {
@@ -47,7 +47,7 @@ describe("Rates", () => {
   });
 
   it("should fetch rates from server", (done) => {
-    const request = jest.fn().mockResolvedValue(items);
+    const request = jest.fn().mockResolvedValue({assets: items});
     const rates = Rates.create({ items: [] }, { request });
 
     rates.fetchAll().then(() => {

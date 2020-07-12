@@ -6,7 +6,7 @@ import { items } from "./../CurrencyRates/rates.mock";
 import PageRates from "./index";
 
 jest.mock("./../../../utils/request");
-request.mockResolvedValue(items);
+request.mockResolvedValue({assets: items});
 
 const setup = () => render(<PageRates />);
 
