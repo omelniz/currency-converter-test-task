@@ -14,6 +14,17 @@ export interface IHistoryTableProps {
   items: Array<IHistoryRecord>;
 }
 
+export function formatDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const year = String(date.getFullYear()).slice(-2);
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const dateN = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth()).padStart(2, "0");
+
+  return `${hours}:${minutes} ${dateN}.${month}.${year}`;
+}
+
 const HistoryTable: React.FC<IHistoryTableProps> = ({ items }) => (
   <div data-testid="history">
     <Table>
@@ -31,9 +42,9 @@ const HistoryTable: React.FC<IHistoryTableProps> = ({ items }) => (
         {items.map((item, index) => (
           <tr key={`${item.asset}${index}`}>
             <td>{item.asset}</td>
-            <td>{item.startDate}</td>
+            <td>{formatDate(item.startDate)}</td>
             <td>{item.startQuote}</td>
-            <td>{item.finishDate}</td>
+            <td>{formatDate(item.finishDate)}</td>
             <td>{item.finishQuote}</td>
             <td>{item.profit}</td>
           </tr>

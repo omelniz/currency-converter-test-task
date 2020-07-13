@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import HistoryTable, { IHistoryTableProps } from "./index";
+import HistoryTable, { IHistoryTableProps, formatDate } from "./index";
 import { items } from "./history.mock";
 
 const setup = (props?: IHistoryTableProps) => render(<HistoryTable {...props} />);
@@ -30,9 +30,9 @@ it("render items", () => {
   rows.forEach((item, index) => {
     const cells = item.querySelectorAll("td");
     expect(cells[0].innerHTML).toBe(items[index].asset);
-    expect(cells[1].innerHTML).toBe(items[index].startDate);
+    expect(cells[1].innerHTML).toBe(formatDate(items[index].startDate));
     expect(cells[2].innerHTML).toBe(items[index].startQuote);
-    expect(cells[3].innerHTML).toBe(items[index].finishDate);
+    expect(cells[3].innerHTML).toBe(formatDate(items[index].finishDate));
     expect(cells[4].innerHTML).toBe(items[index].finishQuote);
     expect(cells[5].innerHTML).toBe(items[index].profit);
   });
