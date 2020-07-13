@@ -48,7 +48,7 @@ function App() {
   const { logout, isAuthorized } = auth;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
       <Header onLogout={logout} isAuthorized={isAuthorized} />
       <Switch>
         <Route path={ROUTES.LOGIN} component={PageLogin} />
