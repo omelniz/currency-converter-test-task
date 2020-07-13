@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import userEvent from "@testing-library/user-event";
 import "mobx-react-lite/batchingForReactDom";
 import { StaticRouter } from "react-router-dom";
 import createStore, { StoreProvider } from "../models/store";
@@ -23,4 +24,4 @@ const customRender = (ui, options = {}) => render(ui, { wrapper: AllTheProviders
 export * from "@testing-library/react";
 
 // override render method
-export { customRender as render };
+export { customRender as render, userEvent };

@@ -14,6 +14,16 @@
   margin: 0px;
 }
 
+.logoLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoLink.isActive {
+  cursor: default;
+  pointer-events: none;
+}
+
 .logoutBtn {
   background: none;
   cursor: pointer;

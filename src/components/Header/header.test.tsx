@@ -1,7 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import {Header} from "./index";
+import { render, screen, userEvent } from "./../../utils/test-utils";
+import { Header } from "./index";
 
 it("should be a HTML header", () => {
   render(<Header />);
@@ -30,4 +29,10 @@ it("should represent logout button for authorized user", () => {
 
   userEvent.click(logoutBtn);
   expect(onLogout).toBeCalled();
+});
+
+it("should represent home link as a logo", () => {
+  render(<Header />);
+
+  screen.getByRole("link", { name: "TEST SPA app" });
 });
