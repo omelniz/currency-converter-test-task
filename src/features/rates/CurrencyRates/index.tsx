@@ -1,5 +1,7 @@
 import React from "react";
 import clsx from "clsx";
+import FlipMove from "react-flip-move";
+import { observer } from "mobx-react-lite";
 import { StarIcon } from "components/Icons";
 import Table, { Thead, Tbody } from "components/Table";
 import styles from "./rates.module.css";
@@ -27,20 +29,22 @@ const CurrencyRates: React.FC<ICurrencyRatesProps> = ({ items }) => (
         </tr>
       </Thead>
       <Tbody>
-        {items.map((item) => (
-          <tr key={item.asset}>
-            <td>
-              <StarIcon
-                role="button"
-                className={clsx(styles.star, { [styles.filledStar]: item.isActive })}
-                onClick={() => item.toggleFavorite()}
-              />
-            </td>
-            <td>{item.asset}</td>
-            <td>{item.quote}</td>
-            <td>{item.startDate}</td>
-          </tr>
-        ))}
+        <FlipMove typeName={null}>
+          {items.map((item) => (
+            <tr key={item.asset}>
+              <td>
+                <StarIcon
+                  role="button"
+                  className={clsx(styles.star, { [styles.filledStar]: item.isActive })}
+                  onClick={() => item.toggleFavorite()}
+                />
+              </td>
+              <td>{item.asset}</td>
+              <td>{item.quote}</td>
+              <td>{item.startDate}</td>
+            </tr>
+          ))}
+        </FlipMove>
       </Tbody>
     </Table>
   </div>
@@ -50,4 +54,4 @@ CurrencyRates.defaultProps = {
   items: [],
 };
 
-export default CurrencyRates;
+export default observer(CurrencyRates);
