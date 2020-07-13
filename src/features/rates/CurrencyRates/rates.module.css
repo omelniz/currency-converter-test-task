@@ -1,0 +1,11 @@
+.star {
+  cursor: pointer;
+}
+
+.star path {
+  transition: fill 0.3s ease;
+}
+
+.filledStar path {
+  fill: var(--color-primary);
+}

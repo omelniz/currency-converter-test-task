@@ -1,0 +1,17 @@
+.header {
+  background-color: var(--color-primary);
+  padding: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.title {
+  color: var(--color-white);
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.inner {
+  margin: 0 10px;
+}
