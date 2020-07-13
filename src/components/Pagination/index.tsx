@@ -13,7 +13,7 @@ const Pagination: React.FC<IPaginationProps> = ({ page, onChange, total }) => {
   const isLastPage = page === total;
 
   return (
-    <nav className={styles.pagination}>
+    <nav aria-label="Pagination" className={styles.pagination}>
       <button
         aria-label="Prev button"
         className={styles.prevBtn}
@@ -26,8 +26,10 @@ const Pagination: React.FC<IPaginationProps> = ({ page, onChange, total }) => {
       <div>
         <input
           className={styles.input}
-          type="text"
+          type="number"
+          min="1"
           max={total}
+          step="1"
           onChange={(e) => onChange(e.target.value)}
           value={page}
         />

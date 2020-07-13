@@ -13,7 +13,12 @@ it("should render current page", () => {
   const page = 1;
 
   setup({ page });
-  expect(screen.getByRole("textbox").value).toBe(`${page}`);
+
+  const input = screen.getByRole("spinbutton");
+  expect(input.value).toBe(`${page}`);
+  expect(input.getAttribute("step")).toBe("1");
+  expect(input.getAttribute("min")).toBe("1");
+  expect(input.getAttribute("type")).toBe("number");
 });
 
 it("should have callback on input change", async () => {
@@ -22,7 +27,7 @@ it("should have callback on input change", async () => {
 
   setup({ onChange });
 
-  await userEvent.type(screen.getByRole("textbox"), page);
+  await userEvent.type(screen.getByRole("spinbutton"), page);
   expect(onChange).toBeCalledWith(page);
 });
 
