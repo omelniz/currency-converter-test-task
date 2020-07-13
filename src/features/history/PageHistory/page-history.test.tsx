@@ -36,9 +36,3 @@ it("should render history table", async () => {
 
   screen.getByTestId("history");
 });
-
-it("should redirect to home when authorized", () => {
-  setup();
-
-  expect(screen.queryByTestId("page-history")).toBeNull();
-});

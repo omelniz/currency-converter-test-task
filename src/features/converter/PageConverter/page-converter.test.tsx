@@ -36,12 +36,6 @@ it("should render converter form", () => {
   screen.getByRole("form", { name: "Converter form" });
 });
 
-it("should redirect to home when authorized", () => {
-  setup();
-
-  expect(screen.queryByTestId("page-converter")).toBeNull();
-});
-
 it("should represent title", () => {
   saveAuth();
   setup();

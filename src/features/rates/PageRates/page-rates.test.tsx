@@ -6,7 +6,7 @@ import { items } from "./../CurrencyRates/rates.mock";
 import PageRates from "./index";
 
 jest.mock("./../../../utils/request");
-request.mockResolvedValue({assets: items});
+request.mockResolvedValue({ assets: items });
 
 const setup = () => render(<PageRates />);
 
@@ -36,10 +36,4 @@ it("should render currency rates", async () => {
 
   screen.getByTestId("currency-rates");
   expect(screen.getAllByRole("row").slice(1).length).toBe(items.length);
-});
-
-it("should redirect to home when authorized", () => {
-  setup();
-
-  expect(screen.queryByTestId("page-rates")).toBeNull();
 });
