@@ -1,4 +1,4 @@
-import Rates from "./../../../models/Rates";
+import Rates from "models/Rates";
 
 export const items = [
   { asset: "EUR/USD", startDate: "2019-07-22", quote: "1.12", isActive: true },

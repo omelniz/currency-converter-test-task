@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import FormConverter from "./../FormConverter";
-import { useStore } from "./../../../models/store";
+import { useStore } from "models/store";
 import styles from "./page-converter.module.css";
 
 const PageConverter: React.FC = () => {

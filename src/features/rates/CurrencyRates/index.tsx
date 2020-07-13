@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import { StarIcon } from "./../../../components/Icons";
-import Table, { Thead, Tbody } from "./../../../components/Table";
+import { StarIcon } from "components/Icons";
+import Table, { Thead, Tbody } from "components/Table";
 import styles from "./rates.module.css";
 
 interface IRate {

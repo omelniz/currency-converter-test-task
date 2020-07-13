@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
-import TextField from "./../../../components/TextField";
-import Button from "./../../../components/Button";
-import { ArrowRightInvertedIcon } from "./../../../components/Icons";
-import { required, composeValidators, password, email } from "./../../../utils/validate";
+import TextField from "components/TextField";
+import Button from "components/Button";
+import { ArrowRightInvertedIcon } from "components/Icons";
+import { required, composeValidators, password, email } from "utils/validate";
 import styles from "./form-login.module.css";
 
 interface IFormLogin {

@@ -1,5 +1,5 @@
 import React from "react";
-import Table, { Thead, Tbody } from "./../../../components/Table";
+import Table, { Thead, Tbody } from "components/Table";
 
 interface IHistoryRecord {
   asset: string;

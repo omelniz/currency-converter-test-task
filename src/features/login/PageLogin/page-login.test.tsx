@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen } from "./../../../utils/test-utils";
-import { saveAuth, clearAuth } from "./../../../models/Auth";
+import { render, screen } from "utils/test-utils";
+import { saveAuth, clearAuth } from "models/Auth";
 import PageLogin from "./index";
 
 afterEach(() => {

@@ -3,7 +3,7 @@ import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FORM_ERROR } from "final-form";
 import FormLogin from "./index";
-import { ERRORS } from "./../../../utils/validate";
+import { ERRORS } from "utils/validate";
 
 const validData = {
   login: "correct@email.com",

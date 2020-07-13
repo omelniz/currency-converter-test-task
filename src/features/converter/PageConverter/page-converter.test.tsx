@@ -1,11 +1,11 @@
 import React from "react";
-import request from "./../../../utils/request";
-import { render, screen } from "./../../../utils/test-utils";
-import { saveAuth, clearAuth } from "./../../../models/Auth";
+import request from "utils/request";
+import { render, screen } from "utils/test-utils";
+import { saveAuth, clearAuth } from "models/Auth";
 import { items } from "./../../rates/CurrencyRates/rates.mock";
 import PageConverter from "./index";
 
-jest.mock("./../../../utils/request");
+jest.mock("utils/request");
 request.mockResolvedValue({ assets: items });
 
 const setup = () => render(<PageConverter />);

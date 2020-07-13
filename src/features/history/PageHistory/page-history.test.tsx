@@ -1,10 +1,10 @@
 import React from "react";
-import request from "./../../../utils/request";
-import { render, screen } from "./../../../utils/test-utils";
+import request from "utils/request";
+import { render, screen } from "utils/test-utils";
 import { items } from "./../HistoryTable/history.mock";
 import PageHistory from "./index";
 
-jest.mock("./../../../utils/request");
+jest.mock("utils/request");
 request.mockResolvedValue(items);
 
 const setup = () => render(<PageHistory />);

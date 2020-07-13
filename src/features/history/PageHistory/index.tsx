@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { useStore } from "./../../../models/store";
+import { useStore } from "models/store";
 import HistoryTable from "./../HistoryTable";
-import Pagination from "./../../../components/Pagination";
-import usePagination from "./../../../hooks/pagination";
+import Pagination from "components/Pagination";
+import usePagination from "hooks/pagination";
 import styles from "./page-history.module.css";
 
 const PageHistory: React.FC = () => {

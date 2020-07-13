@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { TextField } from "./../../../components/TextField";
-import { Select } from "./../../../components/Select";
-import Button from "./../../../components/Button";
+import { TextField } from "components/TextField";
+import { Select } from "components/Select";
+import Button from "components/Button";
 import styles from "./form-converter.module.css";
 
 const keys = Object.keys;
