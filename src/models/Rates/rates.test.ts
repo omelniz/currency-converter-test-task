@@ -1,6 +1,6 @@
 import Rates, { Rate } from "./index";
-
-const rawRate = { asset: "asset", startDate: "date", quote: "quote" };
+import rates from "./../../features/rates/CurrencyRates/rates.mock";
+const rawRate = { asset: "A/B", startDate: "date", quote: "quote" };
 const items = [...Array(5)].map(() => ({ ...rawRate, isActive: false }));
 
 describe("Rate", () => {
@@ -26,7 +26,7 @@ describe("Rates", () => {
   it("should create corrent list of rates", () => {
     const rates = Rates.create({ items });
 
-    expect(rates.toJSON()).toEqual({ items });
+    expect(rates.toJSON()).toEqual({ items, loaded: false });
   });
 
   it("should return sorted by isActive rates", () => {
@@ -47,11 +47,11 @@ describe("Rates", () => {
   });
 
   it("should fetch rates from server", (done) => {
-    const request = jest.fn().mockResolvedValue({assets: items});
+    const request = jest.fn().mockResolvedValue({ assets: items });
     const rates = Rates.create({ items: [] }, { request });
 
     rates.fetchAll().then(() => {
-      expect(rates.toJSON()).toEqual({ items });
+      expect(rates.toJSON()).toEqual({ items, loaded: true });
       done();
     });
   });
@@ -61,8 +61,17 @@ describe("Rates", () => {
     const rates = Rates.create({ items: [] }, { request });
 
     rates.fetchAll().then(() => {
-      expect(rates.toJSON()).toEqual({ items: [] });
+      expect(rates.toJSON()).toEqual({ items: [], loaded: false });
       done();
+    });
+  });
+
+  it("getQuoteTable", () => {
+    expect(rates.getRatesTable).toEqual({
+      AUD: { USD: "2.12" },
+      EUR: { USD: "1.12" },
+      GBP: { USD: "1.12" },
+      USD: { CAD: "2.12", CHF: "1.12", JPY: "2.12" },
     });
   });
 });

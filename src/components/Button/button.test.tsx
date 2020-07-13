@@ -53,11 +53,18 @@ it("represents fullWidth", () => {
 it("not disabled by default", () => {
   setup();
 
-  expect(getButton()).not.toBeDisabled()
+  expect(getButton()).not.toBeDisabled();
 });
 
 it("disabled", () => {
   setup({ disabled: true });
 
-  expect(getButton()).toBeDisabled()
+  expect(getButton()).toBeDisabled();
+});
+
+it("represents custom className", () => {
+  const className = "className";
+  setup({ className });
+
+  expect(getButton().classList.contains(className)).toBeTruthy();
 });

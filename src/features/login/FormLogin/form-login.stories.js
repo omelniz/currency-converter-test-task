@@ -1,4 +1,5 @@
 import React from "react";
+import { action } from "@storybook/addon-actions";
 import FormLogin from "./index";
 
 export default {
@@ -6,4 +7,4 @@ export default {
   component: FormLogin,
 };
 
-export const base = () => <FormLogin />;
+export const base = () => <FormLogin onSubmit={action("onSubmit")} />;

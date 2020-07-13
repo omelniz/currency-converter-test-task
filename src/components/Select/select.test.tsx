@@ -40,3 +40,17 @@ it("should be controlled field", () => {
 
   expect(screen.getAllByRole("option")[1].selected).toBeTruthy();
 });
+
+it("represents custom className", () => {
+  const className = "className";
+  setup({ className });
+
+  expect(screen.getByRole("combobox").classList.contains(className)).toBeTruthy();
+});
+
+it("represents name", () => {
+  const name = "name";
+  setup({ name });
+
+  expect(screen.getByRole("combobox").getAttribute("name")).toBe(name);
+});
