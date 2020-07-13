@@ -5,7 +5,7 @@
 }
 
 .inner {
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -19,12 +19,12 @@
 }
 
 .link {
-  border-top: 1px solid #1a237e;
-  border-left: 1px solid #1a237e;
-  background: #ffffff;
+  border-top: 1px solid var(--color-primary);
+  border-left: 1px solid var(--color-primary);
+  background: var(--color-white);
   padding: 11px 10px;
   font-size: 14px;
-  color: #1a237e;
+  color: var(--color-primary);
   text-align: center;
   text-decoration: none;
   width: 26%;
@@ -37,9 +37,9 @@
 }
 
 .link.isActive {
-  color: #ffffff;
+  color: var(--color-white);
 
-  background-color: #1a237e;
+  background-color: var(--color-primary);
   cursor: default;
   pointer-events: none;
 }
@@ -50,5 +50,5 @@
 
 .link:last-child {
   border-top-right-radius: 20px;
-  border-right: 1px solid #1a237e;
+  border-right: 1px solid var(--color-primary);
 }

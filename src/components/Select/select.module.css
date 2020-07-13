@@ -1,7 +1,7 @@
 .select {
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #1a237e;
+  border: 1px solid var(--color-primary);
   border-radius: 5px;
   height: 40px;
   font-size: 16px;
@@ -9,5 +9,5 @@
   padding-right: 30px;
   appearance: none;
   user-select: none;
-  background: #ffffff url(./../Icons/arrow-down.svg) right 10px bottom 50% no-repeat;
+  background: var(--color-white) url(./../Icons/arrow-down.svg) right 10px bottom 50% no-repeat;
 }

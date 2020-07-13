@@ -1,21 +1,21 @@
 .table {
   border-collapse: collapse;
   width: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-white);
 }
 
 .thead th {
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  color: #ffffff;
+  color: var(--color-white);
   text-align: left;
   padding: 20px 0px;
   position: sticky;
   top: 0;
   left: 0;
   z-index: 1;
-  background-color: #1a237e;
+  background-color: var(--color-primary);
 }
 
 .thead th:first-child,
@@ -30,7 +30,7 @@
 .tbody td {
   font-size: 20px;
   line-height: 27px;
-  color: #000000;
+  color: var(--color-black);
   padding: 10px 0px;
 }
 

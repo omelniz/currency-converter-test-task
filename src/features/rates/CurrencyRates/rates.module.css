@@ -7,5 +7,5 @@
 }
 
 .filledStar path {
-  fill: #1a237e;
+  fill: var(--color-primary);
 }

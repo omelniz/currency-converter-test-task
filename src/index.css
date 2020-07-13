@@ -13,3 +13,10 @@ select {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+:root {
+  --color-primary: #1a237e;
+  --color-error: #d32f2f;
+  --color-white: #ffffff;
+  --color-black: #000000;
+}

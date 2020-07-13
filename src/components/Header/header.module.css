@@ -30,8 +30,8 @@
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  color: #1a237e;
-  border: 1px solid #1a237e;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   box-sizing: border-box;
   border-radius: 20px;
   min-width: 130px;
