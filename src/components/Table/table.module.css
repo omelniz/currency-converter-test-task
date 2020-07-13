@@ -4,11 +4,6 @@
   background-color: #ffffff;
 }
 
-.thead {
-  background-color: #1a237e;
-  position: sticky;
-}
-
 .thead th {
   font-style: normal;
   font-weight: normal;
@@ -16,6 +11,16 @@
   color: #ffffff;
   text-align: left;
   padding: 20px 0px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #1a237e;
+}
+
+.thead th:first-child,
+.tbody td:first-child {
+  padding-left: 35px;
 }
 
 .tbody tr {
