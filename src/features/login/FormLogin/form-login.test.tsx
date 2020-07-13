@@ -2,7 +2,8 @@ import React from "react";
 import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FORM_ERROR } from "final-form";
-import FormLogin, { ERRORS } from "./index";
+import FormLogin from "./index";
+import { ERRORS } from "./../../../utils/validate";
 
 const validData = {
   login: "correct@email.com",
@@ -120,6 +121,10 @@ it("should validate a password", async () => {
 
   await userEvent.type(passwordField, "1234567");
   expect(screen.queryByText(/Минимальное количество символов 7/i)).not.toBeInTheDocument();
+
+  expect(screen.queryByText(/Только буквы, цифры или _/i)).not.toBeInTheDocument();
+  await userEvent.type(passwordField, "1234%$567");
+  expect(screen.queryByText(/Только буквы, цифры или _/i)).toBeInTheDocument();
 });
 
 it("should have callback onSubmit", async () => {

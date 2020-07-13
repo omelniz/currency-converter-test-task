@@ -3,30 +3,8 @@ import { Form, Field } from "react-final-form";
 import TextField from "./../../../components/TextField";
 import Button from "./../../../components/Button";
 import { ArrowRightInvertedIcon } from "./../../../components/Icons";
+import { required, composeValidators, password, email } from "./../../../utils/validate";
 import styles from "./form-login.module.css";
-
-export const ERRORS = {
-  REQUIRED: "Обязательное поле",
-  EMAIL: "Введите корректный емайл",
-  PASSWORD: "Минимальное количество символов 7",
-};
-
-const EMAIL_REGEX = /^(?!^\.)([a-zA-Z0-9_\-\.\+]{0,63}[a-zA-Z0-9_\-\+])@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]{1,254}\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-
-const required = (value: string) => (value ? undefined : ERRORS.REQUIRED);
-const email = (value: string) => (EMAIL_REGEX.test(value) ? undefined : ERRORS.EMAIL);
-const password = (value: string) => {
-  let error = undefined;
-
-  if (value.length < 7) {
-    error = ERRORS.PASSWORD;
-  }
-
-  return error;
-};
-
-const composeValidators = (...validators) => (value, allValues, meta) =>
-  validators.reduce((error, validator) => error || validator(value, allValues, meta), undefined);
 
 interface IFormLogin {
   onSubmit: (values: { login: string; password: string }) => void;
