@@ -13,6 +13,7 @@ export interface ITextField {
   className?: string;
   placeholder?: string;
   hasError?: boolean;
+  min?: number;
 }
 
 export const TextField: React.FC<ITextField> = ({
@@ -25,6 +26,7 @@ export const TextField: React.FC<ITextField> = ({
   placeholder,
   label,
   hasError,
+  min,
 }) => {
   return (
     <div data-testid="text-field" className={className}>
@@ -40,6 +42,7 @@ export const TextField: React.FC<ITextField> = ({
         onChange={onChange}
         placeholder={placeholder}
         aria-invalid={hasError}
+        min={min}
       />
     </div>
   );
@@ -48,6 +51,7 @@ export const TextField: React.FC<ITextField> = ({
 TextField.defaultProps = {
   type: "text",
   hasError: false,
+  min: null,
 };
 
 export default field(TextField);

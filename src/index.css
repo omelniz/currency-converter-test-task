@@ -1,9 +1,17 @@
 @import-normalize;
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,700&display=swap");
 
+:root {
+  --color-primary: #1a237e;
+  --color-error: #d32f2f;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-grey: #e5e5e5;
+}
+
 body {
   margin: 0;
-  background-color: #e5e5e5;
+  background-color: var(--color-grey);
 }
 
 body,
@@ -12,11 +20,4 @@ select {
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-:root {
-  --color-primary: #1a237e;
-  --color-error: #d32f2f;
-  --color-white: #ffffff;
-  --color-black: #000000;
 }

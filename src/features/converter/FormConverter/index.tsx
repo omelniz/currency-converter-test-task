@@ -65,6 +65,7 @@ const FormConverter: React.FC = ({ rates }) => {
               className={styles.field}
               name="amount"
               type="number"
+              min="0"
               label="Сумма"
               onChange={handleAmountChange}
               value={amount}

@@ -1,0 +1,28 @@
+@media (max-width: 640px) {
+  .history thead {
+    display: none;
+  }
+
+  .history tr {
+    display: block;
+    margin: 10px;
+    border: 1px solid var(--color-grey);
+  }
+
+  .history td {
+    display: block;
+    text-align: right;
+    border-bottom: 1px dotted var(--color-grey);
+  }
+
+  .history td:last-child {
+    border-bottom: none;
+  }
+
+  .history td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}

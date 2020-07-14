@@ -1,5 +1,6 @@
 import React from "react";
 import Table, { Thead, Tbody } from "components/Table";
+import styles from "./history.module.css";
 
 interface IHistoryRecord {
   asset: string;
@@ -26,7 +27,7 @@ export function formatDate(dateStr: string) {
 }
 
 const HistoryTable: React.FC<IHistoryTableProps> = ({ items }) => (
-  <div data-testid="history">
+  <div className={styles.history} data-testid="history">
     <Table>
       <Thead>
         <tr>
@@ -41,12 +42,12 @@ const HistoryTable: React.FC<IHistoryTableProps> = ({ items }) => (
       <Tbody>
         {items.map((item, index) => (
           <tr key={`${item.asset}${index}`}>
-            <td>{item.asset}</td>
-            <td>{formatDate(item.startDate)}</td>
-            <td>{item.startQuote}</td>
-            <td>{formatDate(item.finishDate)}</td>
-            <td>{item.finishQuote}</td>
-            <td>{item.profit}</td>
+            <td data-label="Актив">{item.asset}</td>
+            <td data-label="Начало">{formatDate(item.startDate)}</td>
+            <td data-label="Котировка">{item.startQuote}</td>
+            <td data-label="Конец">{formatDate(item.finishDate)}</td>
+            <td data-label="Котировка">{item.finishQuote}</td>
+            <td data-label="Прибыль">{item.profit}</td>
           </tr>
         ))}
       </Tbody>

@@ -1,12 +1,11 @@
 .page {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 20px 20px 20px;
+  padding: 0 10px 20px 10px;
 }
 
 .inner {
   background-color: var(--color-white);
-  border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   overflow: auto;
@@ -22,12 +21,12 @@
   border-top: 1px solid var(--color-primary);
   border-left: 1px solid var(--color-primary);
   background: var(--color-white);
-  padding: 11px 10px;
+  padding: 11px 5px;
   font-size: 14px;
   color: var(--color-primary);
   text-align: center;
   text-decoration: none;
-  width: 26%;
+  width: 33%;
   max-width: 180px;
 }
 
@@ -51,4 +50,10 @@
 .link:last-child {
   border-top-right-radius: 20px;
   border-right: 1px solid var(--color-primary);
+}
+
+@media (min-width: 768px) {
+  .inner {
+    border-top-right-radius: 20px;
+  }
 }
