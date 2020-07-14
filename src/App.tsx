@@ -1,14 +1,16 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { observer } from "mobx-react-lite";
 import { BrowserRouter, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import Header from "./components/Header";
-import PageLogin from "./features/login/PageLogin";
-import PageRates from "./features/rates/PageRates";
-import PageHistory from "./features/history/PageHistory";
-import PageConverter from "./features/converter/PageConverter";
+import Loader from "./components/Loader";
 import { useStore } from "./models/store";
 import ROUTES from "./utils/routes";
 import styles from "./app.module.css";
+
+const PageLogin = lazy(() => import("./features/login/PageLogin"));
+const PageRates = lazy(() => import("./features/rates/PageRates"));
+const PageHistory = lazy(() => import("./features/history/PageHistory"));
+const PageConverter = lazy(() => import("./features/converter/PageConverter"));
 
 function Layout() {
   const { auth } = useStore();
@@ -50,10 +52,12 @@ function App() {
   return (
     <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
       <Header onLogout={logout} isAuthorized={isAuthorized} />
-      <Switch>
-        <Route path={ROUTES.LOGIN} component={PageLogin} />
-        <Route path={ROUTES.HOME} component={Layout} />
-      </Switch>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route path={ROUTES.LOGIN} component={PageLogin} />
+          <Route path={ROUTES.HOME} component={Layout} />
+        </Switch>
+      </Suspense>
     </BrowserRouter>
   );
 }
