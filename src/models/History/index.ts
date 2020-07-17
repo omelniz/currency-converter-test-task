@@ -1,4 +1,5 @@
 import { types, flow, getEnv } from "mobx-state-tree";
+import smartSort from "./sorting-algorithm";
 
 export const HistoryRecord = types.model({
   asset: types.string,
@@ -23,7 +24,7 @@ const History = types
       try {
         const response = yield getEnv(self).request({ action: "history" });
 
-        self.items = response.deals;
+        self.items = smartSort(response.deals);
       } catch (err) {}
     }),
   }));
