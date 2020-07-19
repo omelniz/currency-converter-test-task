@@ -13,7 +13,7 @@ const MIN_PROFIT_DEAL = 1;
 const MAX_SAME_ASSET = 2;
 
 class Bucket {
-  constructor(item) {
+  constructor() {
     this.items = [];
     this.counters = {
       loss: 0,
@@ -21,8 +21,6 @@ class Bucket {
       names: {},
       length: 0,
     };
-
-    this.add(item);
   }
 
   isComplete() {
@@ -74,24 +72,20 @@ class Bucket {
   }
 }
 
-function concatBuckets(result) {
-  return result.reduce((acc, bucket) => {
-    return bucket.isComplete() ? acc.concat(bucket.items) : acc;
-  }, []);
-}
-
 function smartSort(items) {
-  const result = items.reduce((acc, item) => {
-    for (let bucket of acc) {
-      if (bucket.add(item)) {
-        return acc;
-      }
+  const result = [];
+  let bucket = new Bucket();
+
+  for (let item of items) {
+    if (bucket.isComplete()) {
+      result.push(...bucket.items);
+      bucket = new Bucket();
     }
 
-    return acc.concat(new Bucket(item));
-  }, []);
+    bucket.add(item);
+  }
 
-  return concatBuckets(result);
+  return result;
 }
 
 export default smartSort;
